@@ -1,6 +1,6 @@
 {
   "name": "travis-ci-post",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Post data to a Travis CI API endpoint.",
   "author": {
     "name": "Athan Reines",
