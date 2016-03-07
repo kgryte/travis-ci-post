@@ -1,0 +1,33 @@
+{
+	"string": [
+		"protocol",
+		"hostname",
+		"port",
+		"pathname",
+		"token",
+		"accept",
+		"useragent",
+		"data"
+	],
+	"boolean": [
+		"help",
+		"version"
+	],
+	"alias": {
+		"help": [
+			"h"
+		],
+		"version": [
+			"V"
+		],
+		"port": [
+			"p"
+		],
+		"useragent": [
+			"ua"
+		],
+		"data": [
+			"d"
+		]
+	}
+}

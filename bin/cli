@@ -1,0 +1,126 @@
+#!/usr/bin/env node
+'use strict';
+
+// MODULES //
+
+var fs = require( 'fs' );
+var path = require( 'path' );
+var parseArgs = require( 'minimist' );
+var notifier = require( 'update-notifier' );
+var pkg = require( './../package.json' );
+var opts = require( './opts.json' );
+var request = require( './../lib' );
+
+
+// VARIABLES //
+
+var token;
+var data;
+var args;
+
+
+// FUNCTIONS //
+
+/**
+* FUNCTION: onClose()
+*	Callback invoked upon writing a file to `stdout`.
+*
+* @private
+*/
+function onClose() {
+	process.exit( 0 );
+}
+
+
+// INIT //
+
+process.stdout.on( 'error', process.exit );
+
+
+// PACKAGE UPDATES //
+
+notifier( { 'pkg': pkg } ).notify();
+
+
+// ARGUMENTS //
+
+args = parseArgs( process.argv.slice( 2 ), opts );
+
+
+// HELP //
+
+if ( args.help ) {
+	fs.createReadStream( path.join( __dirname, 'usage.txt' ) )
+		.pipe( process.stdout )
+		.on( 'close', onClose );
+    return;
+}
+
+
+// VERSION //
+
+if ( args.version ) {
+	console.log( pkg.version );
+	return;
+}
+
+
+// OPTIONS //
+
+opts = {};
+
+if ( args.protocol ) {
+	opts.protocol = args.protocol;
+}
+if ( args.hostname ) {
+	opts.hostname = args.hostname;
+}
+if ( args.port ) {
+	opts.port = parseInt( args.port, 10 );
+}
+if ( args.pathname ) {
+	opts.pathname = args.pathname;
+}
+if ( args.data ) {
+	data = args.data;
+} else {
+	data = '';
+}
+if ( args.accept ) {
+	opts.Accept = args.accept;
+}
+// if ( args.useragent ) {
+// 	opts.useragent = args.useragent;
+// }
+if ( args.token ) {
+	token = args.token;
+}
+else if ( process.env.TRAVISCI_TOKEN ) {
+	token = process.env.TRAVISCI_TOKEN;
+}
+if ( token ) {
+	opts.token = token;
+}
+
+
+// REQUEST //
+
+request( data, opts, onResponse );
+
+/**
+* FUNCTION: onResponse( error, results )
+*	Callback invoked upon receiving a request response.
+*
+* @private
+* @param {Error|Null} error - error object
+* @param {Object} results - response results
+* @returns {Void}
+*/
+function onResponse( error ) {
+	if ( error ) {
+		process.stderr.write( error.message+'\n', 'utf8' );
+		return process.exit( 1 );
+	}
+	process.stderr.write( 'Success'+'\n', 'utf8' );
+	process.exit( 0 );
+}

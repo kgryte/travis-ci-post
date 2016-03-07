@@ -1,0 +1,15 @@
+
+Usage: travispost [options]
+
+Options:
+
+  -h,  --help               Print this message.
+  -V,  --version            Print the package version.
+       --protocol protocol  Request protocol. Default: https.
+       --hostname host      Hostname. Default: api.travis-ci.org.
+  -p,  --port port          Port. Default: 443 (https) or 80 (http).
+       --pathname pathname  Resource pathname. Default: '/'.
+       --token token        Travis CI access token.
+       --accept media_type  Media type. Default: application/vnd.travis-ci.2+json.
+  -d,  --data data          Request data.
+
