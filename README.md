@@ -25,7 +25,7 @@ Sends a `POST` request to a [Travis CI API][travis-api] endpoint.
 
 ``` javascript
 var opts = {
-	'pathname': '/jobs/42/restart'
+	'pathname': '/builds/114143550/restart'
 };
 
 request( opts, onResponse );
@@ -37,7 +37,8 @@ function onResponse( error, results ) {
 	console.dir( results );
 	/* returns 
 		{
-			"result": true
+			"result": true,
+			"flash": [{"notice": "The build was successfully restarted."}]
 		}
 	*/
 }
@@ -76,7 +77,7 @@ To [authenticate][travis-token] with an endpoint, set the [`token`][travis-token
 
 ``` javascript
 var opts = {
-	'pathname': '/jobs/42/restart',
+	'pathname': '/builds/114143550/restart',
 	'token': 'tkjorjk34ek3nj4!'
 };
 
@@ -87,7 +88,7 @@ To specify a particular [endpoint][travis-api], set the `pathname` option.
 
 ``` javascript
 var opts = {
-	'pathname': '/jobs/42/cancel'
+	'pathname': '/jobs/114143551/cancel'
 };
 
 request( opts, onResponse );
@@ -107,7 +108,12 @@ var opts = {
 
 var update = request.factory( opts, onResponse );
 
-// Repeatedly update an environment variable...
+opts.pathname = '/jobs/114143551/restart';
+delete opts.query;
+
+var restart = request.factory( opts, onResponse );
+
+// Repeatedly update an environment variable and restart a job...
 var data = {
 	'env_var': {
 		'name': 'BEEP',
@@ -116,23 +122,14 @@ var data = {
 	}
 }
 update( data );
+restart();
 
 data.env_var.value += 1;
 update( data );
+restart();
 
 data.env_var.value += 1;
 update( data );
-// ...
-
-
-// Repeatedly restart a job...
-opts.pathname = '/jobs/17/restart';
-delete opts.query;
-
-var restart = request.factory( opts, onResponse );
-
-restart();
-restart();
 restart();
 // ...
 ```
@@ -153,7 +150,7 @@ var request = require( 'travis-ci-post' );
 
 var opts = {
 	'hostname': 'api.travis-ci.org',
-	'pathname': '/builds/27/restart',
+	'pathname': '/builds/114143550/restart',
 	'token': 'tkjorjk34ek3nj4!'
 };
 
@@ -218,25 +215,25 @@ Options:
 Setting the access [token][travis-token] using the command-line option:
 
 ``` bash
-$ DEBUG=* travispost --token <token> --pathname '/builds/42/restart'
+$ DEBUG=* travispost --token <token> --pathname '/builds/114143550/restart'
 ```
 
 Setting the access [token][travis-token] using an environment variable:
 
 ``` bash
-$ DEBUG=* TRAVISCI_TOKEN=<token> travispost --pathname '/builds/42/restart'
+$ DEBUG=* TRAVISCI_TOKEN=<token> travispost --pathname '/builds/114143550/restart'
 ```
 
 For local installations, modify the command to point to the local installation directory; e.g., 
 
 ``` bash
-$ DEBUG=* ./node_modules/.bin/travispost --token <token> --pathname '/builds/42/restart'
+$ DEBUG=* ./node_modules/.bin/travispost --token <token> --pathname '/builds/114143550/restart'
 ```
 
 Or, if you have cloned this repository and run `npm install`, modify the command to point to the executable; e.g., 
 
 ``` bash
-$ DEBUG=* node ./bin/cli --token <token> --pathname '/builds/42/restart'
+$ DEBUG=* node ./bin/cli --token <token> --pathname '/builds/114143550/restart'
 ```
 
 

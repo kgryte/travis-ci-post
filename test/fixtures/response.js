@@ -38,7 +38,7 @@ function Response( statusCode ) {
 	* @returns {Void}
 	*/
 	function onTimeout() {
-		if ( statusCode !== 200 ) {
+		if ( statusCode !== 200 && statusCode !== 202 ) {
 			self.emit( 'data', 'bad request' );
 			return self.emit( 'end' );
 		}

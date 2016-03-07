@@ -1,3 +1,4 @@
 {
-    "result": true
+	"result": true,
+	"flash": [{"notice": "The build was successfully restarted."}]
 }

@@ -4,7 +4,7 @@ var request = require( './../lib' );
 
 var opts = {
 	'hostname': 'api.travis-ci.org',
-	'pathname': '/builds/27/restart',
+	'pathname': '/builds/114143550/restart',
 
 	// INSERT TOKEN HERE //
 	'token': '<your_token_goes_here>'

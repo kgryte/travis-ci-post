@@ -124,7 +124,6 @@ function onResponse( error ) {
 		process.stderr.write( error.message+'\n', 'utf8' );
 		return process.exit( 1 );
 	}
-	// TODO
 	process.stderr.write( 'Success'+'\n', 'utf8' );
 	process.exit( 0 );
 }
