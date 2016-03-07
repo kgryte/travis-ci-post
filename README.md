@@ -21,7 +21,7 @@ var request = require( 'travis-ci-post' );
 <a name="request"></a>
 #### request( [data,] options, clbk )
 
-Sends a `POST` request to a [Travis CI API][travis-api] endpoint. Request `data` may be provided as either a JSON `object` or a `string`.
+Sends a `POST` request to a [Travis CI API][travis-api] endpoint.
 
 ``` javascript
 var opts = {
@@ -43,6 +43,26 @@ function onResponse( error, results ) {
 }
 ```
 
+Request `data` may be provided as either a JSON `object` or a `string`.
+
+``` javascript
+var opts = {
+	'pathname': '/settings/env_vars',
+	'query': 'repository_id=42',
+	'token': 'tkjorjk34ek3nj4!'
+};
+
+var data = {
+	'env_var': {
+		'name': 'BEEP',
+		'value': 'boop',
+		'public': false
+	}
+};
+
+request( data, opts, onResponse );
+```
+
 The `function` accepts the following `options`:
 *	__protocol__: request protocol. Default: `'https'`.
 *	__hostname__: endpoint hostname. Default: `'api.travis-ci.org'`.
@@ -50,6 +70,7 @@ The `function` accepts the following `options`:
 *	__pathname__: resource [pathname][travis-api]; e.g., `/repos`. Default: `'/'`.
 *	__token__: Travis CI [access token][travis-token].
 *	__accept__: media type. Default: `'application/vnd.travis-ci.2+json'`.
+*	__query__: params portion of a query `string`; e.g., `beep=boop&a=b`. Default: `''`.
 
 To [authenticate][travis-token] with an endpoint, set the [`token`][travis-token] option.
 
@@ -79,13 +100,37 @@ Creates a reusable `function`.
 
 ``` javascript
 var opts = {
-	'pathname': '/jobs/42/restart',
+	'pathname': '/settings/env_vars',
+	'query': 'repository_id=42',
 	'token': 'tkjorjk34ek3nj4!'
 };
 
-var restart = request.factory( opts, onResponse );
+var update = request.factory( opts, onResponse );
+
+// Repeatedly update an environment variable...
+var data = {
+	'env_var': {
+		'name': 'BEEP',
+		'value': 0,
+		'public': false
+	}
+}
+update( data );
+
+data.env_var.value += 1;
+update( data );
+
+data.env_var.value += 1;
+update( data );
+// ...
+
 
 // Repeatedly restart a job...
+opts.pathname = '/jobs/17/restart';
+delete opts.query;
+
+var restart = request.factory( opts, onResponse );
+
 restart();
 restart();
 restart();
@@ -159,6 +204,7 @@ Options:
        --token token        Travis CI access token.
        --accept media_type  Media type. Default: application/vnd.travis-ci.2+json.
   -d,  --data data          Request data.
+  -qs, --query querystring  Params portion of a query string.
 ```
 
 

@@ -7,7 +7,8 @@
 		"token",
 		"accept",
 		"useragent",
-		"data"
+		"data",
+		"query"
 	],
 	"boolean": [
 		"help",
@@ -28,6 +29,9 @@
 		],
 		"data": [
 			"d"
+		],
+		"query": [
+			"qs"
 		]
 	}
 }

@@ -11,7 +11,7 @@ var query = require( './../lib/query.js' );
 
 var getOpts = require( './fixtures/opts.js' );
 var results = require( './fixtures/results.json' );
-var data = '{"hook":{"id":42,"active":true}}';
+var data = '{}';
 
 
 // TESTS //

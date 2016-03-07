@@ -12,7 +12,7 @@ var request = require( './../lib/request.js' );
 var getOpts = require( './fixtures/opts.js' );
 var http = require( './fixtures/http.js' );
 var results = require( './fixtures/results.json' );
-var data = '{"hook":{"id":42,"active":true}}';
+var data = '{}';
 
 
 // TESTS //

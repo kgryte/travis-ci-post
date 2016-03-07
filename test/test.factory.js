@@ -12,7 +12,7 @@ var factory = require( './../lib/factory.js' );
 
 var getOpts = require( './fixtures/opts.js' );
 var results = require( './fixtures/results.json' );
-var data = '{"hook":{"id":42,"active":true}}';
+var data = '{}';
 
 
 // TESTS //
@@ -143,7 +143,7 @@ tape( 'function returns a function which throws if provided a data argument whic
 	}
 });
 
-tape( 'function returns a function which returns an error to a provided callback if an error is encountered when updating resources', function test( t ) {
+tape( 'function returns a function which returns an error to a provided callback if an error is encountered when making a request', function test( t ) {
 	var factory;
 	var opts;
 	var fcn;

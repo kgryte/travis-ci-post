@@ -12,4 +12,5 @@ Options:
        --token token        Travis CI access token.
        --accept media_type  Media type. Default: application/vnd.travis-ci.2+json.
   -d,  --data data          Request data.
+  -qs, --query querystring  Params portion of a query string.
 

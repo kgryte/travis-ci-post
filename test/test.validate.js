@@ -161,6 +161,31 @@ tape( 'if provided a `pathname` option which is not a primitive string, the func
 	t.end();
 });
 
+tape( 'if provided a `query` option which is not a primitive string, the function returns a type error', function test( t ) {
+	var values;
+	var err;
+	var i;
+
+	values = [
+		5,
+		NaN,
+		null,
+		undefined,
+		true,
+		[],
+		{},
+		function(){}
+	];
+
+	for ( i = 0; i < values.length; i++ ) {
+		err = validate( {}, {
+			'query': values[i]
+		});
+		t.ok( err instanceof TypeError, 'returns type error when provided ' + values[i] );
+	}
+	t.end();
+});
+
 tape( 'if provided a `token` option which is not a primitive string, the function returns a type error', function test( t ) {
 	var values;
 	var err;
@@ -246,7 +271,8 @@ tape( 'the function returns `null` if all options are valid', function test( t )
 		'protocol': 'http',
 		'hostname': 'beep.com',
 		'port': 8080,
-		'pathname': '/api/v3',
+		'pathname': '/build/17/restart',
+		'query': 'a=b',
 		'token': 'abcdefg',
 		'accept': 'beepboop',
 		'useragent': 'beeper-booper'

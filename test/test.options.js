@@ -13,7 +13,7 @@ function setup() {
 		'method': 'POST',
 		'protocol': 'http',
 		'hostname': 'api.travis-ci.com',
-		'pathname': '/hooks',
+		'pathname': '/builds/17/restart',
 		'port': 80,
 		'useragent': 'beep-boop',
 		'accept': 'application/vnd.travis-ci.2+json',

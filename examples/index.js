@@ -2,22 +2,15 @@
 
 var request = require( './../lib' );
 
-var data = {
-	'hook': {
-		'id': 42,
-		'active': true // enable
-	}
-};
-
 var opts = {
 	'hostname': 'api.travis-ci.org',
-	'pathname': '/hooks',
+	'pathname': '/builds/27/restart',
 
 	// INSERT TOKEN HERE //
 	'token': '<your_token_goes_here>'
 };
 
-request( data, opts, onResponse );
+request( opts, onResponse );
 
 /**
 * FUNCTION: onResponse( error, results )

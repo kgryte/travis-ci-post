@@ -81,6 +81,9 @@ if ( args.port ) {
 if ( args.pathname ) {
 	opts.pathname = args.pathname;
 }
+if ( args.query ) {
+	opts.query = args.query;
+}
 if ( args.data ) {
 	data = args.data;
 } else {
@@ -121,6 +124,7 @@ function onResponse( error ) {
 		process.stderr.write( error.message+'\n', 'utf8' );
 		return process.exit( 1 );
 	}
+	// TODO
 	process.stderr.write( 'Success'+'\n', 'utf8' );
 	process.exit( 0 );
 }
