@@ -88,7 +88,8 @@ To specify a particular [endpoint][travis-api], set the `pathname` option.
 
 ``` javascript
 var opts = {
-	'pathname': '/jobs/114143551/cancel'
+	'pathname': '/jobs/114143551/cancel',
+	'token': 'tkjorjk34ek3nj4!'
 };
 
 request( opts, onResponse );
