@@ -25,7 +25,8 @@ Sends a `POST` request to a [Travis CI API][travis-api] endpoint.
 
 ``` javascript
 var opts = {
-	'pathname': '/builds/114143550/restart'
+	'pathname': '/builds/114143550/restart',
+	'token': 'tkjorjk34ek3nj4!'
 };
 
 request( opts, onResponse );
